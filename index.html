@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Checker</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #c7e9ff, #eef5ff);
+      font-family: Arial, sans-serif;
+      color: #18324b;
+    }
+
+    .card {
+      width: min(420px, 86%);
+      padding: 32px;
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 16px 40px #294d6b22;
+      text-align: center;
+    }
+
+    input, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    input {
+      border: 1px solid #cbd8e4;
+    }
+
+    button {
+      border: 0;
+      background: #2878c7;
+      color: white;
+      cursor: pointer;
+    }
+
+    .result, .error {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 14px;
+      text-align: left;
+      line-height: 1.8;
+      background: #f2f8fd;
+    }
+
+    .error {
+      color: #a52c2c;
+      background: #fff0f0;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Today's Weather</h1>
+    <p>Enter a city name to check the current weather.</p>
+
+    <form method="post">
+      <input
+        name="city"
+        placeholder="For example: Seoul"
+        value="{{ city }}"
+        required
+      >
+      <button type="submit">Check Weather</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if weather %}
+      <section class="result">
+        <strong>{{ weather.city }}</strong><br>
+        Weather: {{ weather.description }}<br>
+        Temperature: {{ weather.temp }}°C<br>
+        Feels like: {{ weather.feels_like }}°C<br>
+        Humidity: {{ weather.humidity }}%
+      </section>
+    {% endif %}
+  </main>
+</body>
+</html>
